@@ -88,7 +88,7 @@ public class NoteBook {
         result.append("uuid: ").append(uuid).append("; ")
                 .append("maxSize: ").append(maxSize).append("; ");
         for (int i = 0; i < notes.size(); i++){
-            result.append(i).append(". ").append(notes.get(i).toString()).append("\n");
+            result.append(i+1).append(". ").append(notes.get(i).toString()).append("\n");
         }
         return result.toString();
     }

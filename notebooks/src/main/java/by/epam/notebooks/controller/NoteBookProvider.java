@@ -85,7 +85,7 @@ public class NoteBookProvider {
         return holder.get(id).toString();
     }
 
-    public String allNotebooksToString() { return holder.toString(); }
+    public String allNotebooksToString() { return holder.allNotebooksToString(); }
 
     public String notesToString(UUID id, int[] numNote) {
         return holder.get(id).notesToString(numNote);

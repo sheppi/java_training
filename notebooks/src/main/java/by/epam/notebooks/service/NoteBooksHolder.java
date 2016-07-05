@@ -30,4 +30,8 @@ public class NoteBooksHolder {
     public NoteBook get(UUID uuid){
         return noteBooks.get(uuid);
     }
+
+    public String allNotebooksToString() {
+        return noteBooks.toString();
+    }
 }
