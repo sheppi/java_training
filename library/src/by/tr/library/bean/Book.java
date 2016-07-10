@@ -18,11 +18,6 @@ public class Book {
 		this.price = price;
 	}
 
-	public Book(String author, String title) {
-		this.title = title;
-		this.author = author;
-	}
-
 	public Book(String author, String title, int price) {
 		this.title = title;
 		this.author = author;
@@ -55,5 +50,10 @@ public class Book {
 
 	public void setAuthor(String author) {
 		this.author = author;
+	}
+
+	@Override
+	public String toString() {
+		return author + ' ' + title + ' ' + price;
 	}
 }
