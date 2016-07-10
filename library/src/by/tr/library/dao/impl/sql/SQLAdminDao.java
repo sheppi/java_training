@@ -1,4 +1,4 @@
-package by.tr.library.dao.impl;
+package by.tr.library.dao.impl.sql;
 
 import by.tr.library.bean.Book;
 import by.tr.library.dao.AdminDao;

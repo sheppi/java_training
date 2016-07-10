@@ -25,10 +25,10 @@ public class LibraryServiceImpl implements LibraryService{
 	}
 
 	@Override
-	public boolean addBook(String titile, String author) throws ServiceException {
+	public boolean addBook(String title, String author) throws ServiceException {
 		//validation
 		
-		Book book = new Book();// Book(title, author)
+		Book book = new Book(title, author);
 		
 		DAOFactory factory = DAOFactory.getInstance();
 		AdminDao adminDAo = factory.getAdminDao();

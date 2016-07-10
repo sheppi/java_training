@@ -1,4 +1,4 @@
-package by.tr.library.dao.impl;
+package by.tr.library.dao.impl.sql;
 
 import java.util.ArrayList;
 import java.util.List;

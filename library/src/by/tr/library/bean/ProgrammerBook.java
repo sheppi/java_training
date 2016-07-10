@@ -1,27 +1,26 @@
 package by.tr.library.bean;
 
 public class ProgrammerBook extends Book {
-	private String level;
+
 	private String language;
+	private String level;
 	
 	public ProgrammerBook(){
 		super("no title", 0);//new Book("",0);
-		level="no";
 		language = "";
+		level="no";
 	}
 	
-	public ProgrammerBook(String title, int price, String level, String language){
+	public ProgrammerBook(String title, int price, String language, String level){
 		super(title, price);
-		this.level = level;
 		this.language = language;
+		this.level = level;
 		
 	}
 
-	public String getLevel() {
-		return level;
-	}
-
-	public void setLevel(String level) {
+	public ProgrammerBook(String author, String title, int price, String language, String level) {
+		super(author, title, price);
+		this.language = language;
 		this.level = level;
 	}
 
@@ -32,6 +31,16 @@ public class ProgrammerBook extends Book {
 	public void setLanguage(String language) {
 		this.language = language;
 	}
+
+	public String getLevel() {
+		return level;
+	}
+
+	public void setLevel(String level) {
+		this.level = level;
+	}
+
+
 	
 	
 

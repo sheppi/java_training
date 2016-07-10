@@ -17,7 +17,7 @@ public class Main {
 		
 		Response response = controller.doAction(request);
 		
-		if(response.getErrorMessage() != null){
+		if(response.getErrorMessage() == null){
 			System.out.println(response.getMessage());
 		}else{
 			System.out.println(response.getErrorMessage());
