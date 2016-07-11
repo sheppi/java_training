@@ -16,7 +16,7 @@
 hs_err_pid*
 
 #data for project directory
-data
+#data
 
 #ignore maven
 target
