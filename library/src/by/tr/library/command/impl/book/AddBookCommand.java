@@ -18,14 +18,11 @@ public class AddBookCommand implements Command {
 		int price = request.getPrice();
 		boolean result;
 
-
-/////////////////////////
 		ServiceFactory factory = ServiceFactory.getInstance();
 		LibraryService service = factory.getLibraryService();
 
-/////////////////////////
 		try {
-			switch (request.getType()){
+			switch (request.getType().toLowerCase()){
 				case "programmer" :
 					String language = request.getFirstParameter();
 					String level = request.getSecondParameter();

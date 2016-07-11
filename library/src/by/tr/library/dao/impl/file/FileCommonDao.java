@@ -19,7 +19,7 @@ public class FileCommonDao implements CommonDao {
     @Override
     public boolean authorization(String login, String password) throws DAOException {
 
-        Path users = Paths.get("data" + File.separator + "users.txt");
+        Path users = Paths.get("data" + File.separator + "db" + File.separator +"users.txt");
         String line;
 
         if (Files.exists(users) && Files.isReadable(users)){
@@ -45,5 +45,7 @@ public class FileCommonDao implements CommonDao {
         }
         return false;
     }
+
+
 
 }

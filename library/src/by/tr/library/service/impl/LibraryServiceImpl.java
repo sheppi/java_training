@@ -55,12 +55,25 @@ public class LibraryServiceImpl implements LibraryService{
 
 		// call method check
 		try {
-			adminDao.addNewBook(book);
+			return adminDao.addNewBook(book);
 		} catch (DAOException e) {
 			throw new ServiceException("service message", e);
 		}
+	}
 
-		return false;
+	@Override
+	public boolean deleteBook(String title) throws ServiceException {
+		//validation
+
+		DAOFactory factory = DAOFactory.getInstance();
+		AdminDao adminDao = factory.getAdminDao();
+
+		// call method check
+		try {
+			return adminDao.deleteBook(title);
+		} catch (DAOException e) {
+			throw new ServiceException("service message", e);
+		}
 	}
 
 	@Override

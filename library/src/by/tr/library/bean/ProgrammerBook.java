@@ -40,8 +40,8 @@ public class ProgrammerBook extends Book {
 		this.level = level;
 	}
 
-
-	
-	
-
+	@Override
+	public String toString() {
+		return getAuthor() + ' ' + getTitle() + ' ' + getPrice() + ' ' + language + ' ' + ' ' + level;
+	}
 }

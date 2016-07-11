@@ -7,6 +7,7 @@ public class Request {
 	private String title;
 	private String author;
 	private int price;
+	private int id;
 	private String type;
 	private String firstParameter;
 	private String secondParameter;
@@ -14,23 +15,25 @@ public class Request {
 	public Request(){
 		
 	}
-	
+
+	public Request(int id) {
+		this.id = id;
+	}
+
 	public Request(String login, String password) {
 		super();
 		this.login = login;
 		this.password = password;
 	}
 
-	public Request(String login, String password, String title) {
+	public Request(int id, String title) {
 		super();
-		this.login = login;
-		this.password = password;
+		this.id = id;
 		this.title = title;
 	}
 
-	public Request(String login, String password, String author, String title) {
-		this.login = login;
-		this.password = password;
+	public Request(int id, String author, String title) {
+		this.id = id;
 		this.title = title;
 		this.author = author;
 	}
@@ -81,6 +84,14 @@ public class Request {
 
 	public int getPrice() {
 		return price;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getType() {
