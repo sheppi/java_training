@@ -1,0 +1,4 @@
+login password
+admin admin
+mylogin mypassword
+user qwerty blocked
