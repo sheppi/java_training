@@ -1,4 +1,6 @@
-123 user userpass 1
-157 mylogin mypassword 1
-220 badboy reallybad 1 blocked
-123 admin admin 10
+123 user userpass
+157 mylogin mypassword
+220 badboy reallybad blocked
+350 admin admin
+351 mynewlogin mynewpassword
+352 mynewlogin123 mynewpassword123

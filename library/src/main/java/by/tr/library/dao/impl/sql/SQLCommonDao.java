@@ -22,4 +22,9 @@ public class SQLCommonDao implements CommonDao {
 		return true;
 	}
 
+	@Override
+	public boolean registration(String login, String password) throws DAOException {
+		return false;
+	}
+
 }

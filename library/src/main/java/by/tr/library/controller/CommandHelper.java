@@ -18,7 +18,6 @@ public class CommandHelper {
 		commands.put(CommandName.ADD_BOOK_COMMAND, new AddBookCommand());
 		commands.put(CommandName.DELETE_BOOK_COMMAND, new DeleteBookCommand());
 		commands.put(CommandName.GET_CATALOG, new GetCalatog());
-		commands.put(CommandName.RETURN_BOOK_COMMAND, new ReturnBookCommand());
 		commands.put(CommandName.TAKE_BOOK_COMMAND, new TakeBookCommand());
 
 		//user

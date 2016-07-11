@@ -27,7 +27,7 @@ public class RegisterUser implements Command {
 		}
 		Response response = new Response();
 		response.setErrorMessage(null);
-		response.setMessage("Logination is OK");
+		response.setMessage("Registration is OK");
 
 		return response;
 	}

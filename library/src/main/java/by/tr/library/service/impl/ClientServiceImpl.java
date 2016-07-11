@@ -46,7 +46,7 @@ public class ClientServiceImpl implements ClientService{
 
 		boolean result;
 		try {
-			result = commonDao.authorization(login, password);
+			result = commonDao.registration(login, password);
 		} catch (DAOException e) {
 			throw new ServiceException("service message", e);
 		}

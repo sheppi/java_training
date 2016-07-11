@@ -13,6 +13,16 @@ public class SQLAdminDao implements AdminDao {
 	}
 
 	@Override
+	public boolean unBlockUser(int idUser) throws DAOException {
+		return false;
+	}
+
+	@Override
+	public boolean deleteUser(int idUser) throws DAOException {
+		return false;
+	}
+
+	@Override
 	public boolean addNewBook(Book book) {
 		// TODO Auto-generated method stub
 		return false;

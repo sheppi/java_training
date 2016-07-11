@@ -2,15 +2,12 @@ package by.tr.library.dao.impl.file;
 
 import by.tr.library.bean.Book;
 import by.tr.library.bean.ProgrammerBook;
+import by.tr.library.dao.datatype.FileDao;
 import by.tr.library.dao.UserDao;
 import by.tr.library.dao.exception.DAOException;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -18,11 +15,10 @@ import java.util.Scanner;
 /**
  * Created by Kirill Kaluga on 10.07.2016.
  */
-public class FileUserDao implements UserDao {
+public class FileUserDao extends FileDao implements UserDao {
 
     @Override
     public List<Book> getCatalog() throws DAOException {
-        Path books = Paths.get("data" + File.separator + "db" + File.separator + "books.txt");
         String line;
         ArrayList<Book> catalog = new ArrayList<>();
         Book book;
@@ -46,7 +42,7 @@ public class FileUserDao implements UserDao {
                     catalog.add(book);
                 }
             } catch (IOException e) {
-                e.printStackTrace();
+                throw new DAOException(e.getMessage());
             }
         }
         else if (!Files.exists(books)){
@@ -60,7 +56,6 @@ public class FileUserDao implements UserDao {
 
     @Override
     public Book getBookByTitle(String title) throws DAOException {
-        Path books = Paths.get("data" + File.separator + "db" + File.separator + "books.txt");
         String line; Book book;
 
         if (Files.exists(books) && Files.isReadable(books)) {
@@ -84,7 +79,7 @@ public class FileUserDao implements UserDao {
                     }
                 }
             } catch (IOException e) {
-                e.printStackTrace();
+                throw new DAOException(e.getMessage());
             }
         }
         else if (!Files.exists(books)){

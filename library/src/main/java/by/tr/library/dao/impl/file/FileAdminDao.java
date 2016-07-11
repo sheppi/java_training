@@ -2,29 +2,26 @@ package by.tr.library.dao.impl.file;
 
 import by.tr.library.bean.Book;
 import by.tr.library.dao.AdminDao;
+import by.tr.library.dao.datatype.FileDao;
 import by.tr.library.dao.exception.DAOException;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
-import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Stream;
 
 /**
  * Created by Kirill Kaluga on 10.07.2016.
  */
-public class FileAdminDao implements AdminDao {
+public class FileAdminDao extends FileDao implements AdminDao {
 
     @Override
     public boolean blockUser(int idUser) throws DAOException {
-        Path users = Paths.get("data" + File.separator + "db" + File.separator + "users.txt");
         String line;
         Charset charset = StandardCharsets.UTF_8;
         StringBuilder content = new StringBuilder("");
@@ -94,7 +91,6 @@ public class FileAdminDao implements AdminDao {
 
     @Override
     public boolean deleteUser(int idUser) throws DAOException{
-        Path users = Paths.get("data" + File.separator + "db" + File.separator + "users.txt");
         String line;
         Charset charset = StandardCharsets.UTF_8;
         StringBuilder content = new StringBuilder("");
@@ -124,11 +120,9 @@ public class FileAdminDao implements AdminDao {
 
     @Override
     public boolean addNewBook(Book book) throws DAOException {
-        Path books = Paths.get("data" + File.separator + "db" + File.separator + "books.txt");
-
         if (Files.exists(books) && Files.isWritable(books)){
             try {
-                Files.write(books, book.toString().getBytes(), StandardOpenOption.APPEND);
+                Files.write(books, (book.toString() + '\n').getBytes(), StandardOpenOption.APPEND);
                 return true;
             }catch (IOException e) {
                 throw new DAOException(e.getMessage());
@@ -144,7 +138,6 @@ public class FileAdminDao implements AdminDao {
 
     @Override
     public boolean deleteBook(String title) throws DAOException {
-        Path books = Paths.get("data" + File.separator + "db" + File.separator + "books.txt");
         String line;
         Charset charset = StandardCharsets.UTF_8;
         StringBuilder content = new StringBuilder("");

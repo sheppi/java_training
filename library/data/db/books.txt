@@ -1,4 +1,5 @@
-Kirill_Kaluga BioMe 1000
-Herbert_Schildt C#:_A_Beginner's_Guide 200000 C#
+Herbert_Schildt C#:_A_Beginner's_Guide 200000 C# novice
 Herbert_Schildt C++:_A_Beginner's_Guide 200000 C++ novice
-Smoke_De BioMe 100000
+Andrzej_Sapkowski Blood_of_Elves 90000
+John_Ronald_Reuel_Tolkien The_Lord_of_the_Rings 150000
+Andrzej_Sapkowski Time_of_Contempt 90000

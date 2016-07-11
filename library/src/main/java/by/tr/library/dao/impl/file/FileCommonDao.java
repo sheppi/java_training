@@ -1,25 +1,21 @@
 package by.tr.library.dao.impl.file;
 
 import by.tr.library.dao.CommonDao;
+import by.tr.library.dao.datatype.FileDao;
 import by.tr.library.dao.exception.DAOException;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.Scanner;
-import java.util.stream.Stream;
 
 /**
  * Created by Kirill Kaluga on 10.07.2016.
  */
-public class FileCommonDao implements CommonDao {
+public class FileCommonDao extends FileDao implements CommonDao {
 
     @Override
     public boolean authorization(String login, String password) throws DAOException {
-
-        Path users = Paths.get("data" + File.separator + "db" + File.separator +"users.txt");
         String line;
 
         if (Files.exists(users) && Files.isReadable(users)){
@@ -34,11 +30,11 @@ public class FileCommonDao implements CommonDao {
                     }
                 }
             } catch (IOException e) {
-                e.printStackTrace();
+                throw new DAOException(e.getMessage());
             }
         }
         else if (!Files.exists(users)){
-            throw new DAOException("Filed doesn't exist");
+            throw new DAOException("Filed doesn't exist.");
         }
         else {
             throw new DAOException("Filed doesn't readable.");
@@ -46,6 +42,34 @@ public class FileCommonDao implements CommonDao {
         return false;
     }
 
+    @Override
+    public boolean registration(String login, String password) throws DAOException {
+        String line;
+        int lastId = 0;
+
+        if (Files.exists(users) && Files.isReadable(users) && Files.isWritable(users)){
+            try (Scanner scanner = new Scanner(users)) {
+                while (scanner.hasNext()){
+                    line = scanner.nextLine();
+                    if (line.contains(login + " " + password)){
+                        throw new DAOException("User already exist");
+                    }
+                    lastId = Integer.parseInt(line.substring(0,3));
+                }
+                String user = String.valueOf(lastId+1) + ' ' + login + ' ' + password + '\n';
+                Files.write(users, user.getBytes(), StandardOpenOption.APPEND);
+                return true;
+            } catch (IOException e) {
+                throw new DAOException(e.getMessage());
+            }
+        }
+        else if (!Files.exists(users)){
+            throw new DAOException("Filed doesn't exist.");
+        }
+        else {
+            throw new DAOException("Filed doesn't readable or writable.");
+        }
+    }
 
 
 }
