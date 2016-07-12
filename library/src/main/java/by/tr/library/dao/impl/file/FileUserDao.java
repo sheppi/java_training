@@ -46,14 +46,17 @@ public class FileUserDao extends FileDao implements UserDao {
                     catalog.add(book);
                 }
             } catch (IOException e) {
+                LOG.error("FileUserDao: getCatalog failed. Exception: " + e.getMessage());
                 throw new DAOException(e.getMessage());
             }
         }
         else if (!Files.exists(books)){
-            throw new DAOException("Filed doesn't exist");
+            LOG.error("FileUserDao: getCatalog failed. Filed doesn't exist");
+            throw new DAOException("File doesn't exist");
         }
         else {
-            throw new DAOException("Filed doesn't readable.");
+            LOG.error("FileUserDao: getCatalog failed. Filed doesn't writable.");
+            throw new DAOException("File doesn't writable.");
         }
         return catalog;
     }
@@ -82,16 +85,20 @@ public class FileUserDao extends FileDao implements UserDao {
                         return book;
                     }
                 }
+                LOG.error("FileUserDao: getBookByTitle failed. Book doesn't exist.");
+                throw new DAOException("Book doesn't exist.");
             } catch (IOException e) {
+                LOG.error("FileUserDao: getBookByTitle failed. Exception: " + e.getMessage());
                 throw new DAOException(e.getMessage());
             }
         }
         else if (!Files.exists(books)){
-            throw new DAOException("Filed doesn't exist");
+            LOG.error("FileUserDao: getBookByTitle failed. Filed doesn't exist");
+            throw new DAOException("File doesn't exist");
         }
         else {
-            throw new DAOException("Filed doesn't readable.");
+            LOG.error("FileUserDao: getBookByTitle failed. Filed doesn't writable.");
+            throw new DAOException("File doesn't writable.");
         }
-        return null;
     }
 }

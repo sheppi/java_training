@@ -56,4 +56,17 @@ public class Book {
 	public String toString() {
 		return author + ' ' + title + ' ' + price;
 	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+
+		Book book = (Book) o;
+
+		if (price != book.price) return false;
+		if (!author.equals(book.author)) return false;
+		return title.equals(book.title);
+
+	}
 }

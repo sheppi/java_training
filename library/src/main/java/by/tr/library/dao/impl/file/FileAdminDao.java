@@ -49,11 +49,11 @@ public class FileAdminDao extends FileDao implements AdminDao {
                     Files.write(users, content.toString().getBytes(charset));
                     return true;
                 }
-                LOG.error("FileAdminDao: blockUser failed. User not found.");
-                throw new DAOException("User not found");
+                LOG.error("FileAdminDao: blockUser failed. User doesn't exist.");
+                throw new DAOException("User doesn't exist.");
             }
             catch (IOException e) {
-                LOG.error("FileAdminDao: blockUser failed. " + e.getMessage());
+                LOG.error("FileAdminDao: blockUser failed. Exception: " + e.getMessage());
                 throw new DAOException(e.getMessage());
             }
         }
@@ -96,6 +96,7 @@ public class FileAdminDao extends FileDao implements AdminDao {
                 throw new DAOException("User not found!");
             }
             catch (IOException e) {
+                LOG.error("FileAdminDao: unBlockUser failed. Exception: " + e.getMessage());
                 throw new DAOException(e.getMessage());
             }
         }
@@ -130,14 +131,16 @@ public class FileAdminDao extends FileDao implements AdminDao {
                     Files.write(users, content.toString().getBytes(charset));
                     return true;
                 }
+                LOG.error("FileAdminDao: deleteUser failed. User doesn't exist.");
                 throw new DAOException("User doesn't exist.");
             } catch (IOException e) {
+                LOG.error("FileAdminDao: deleteUser failed. Exception: " + e.getMessage());
                 throw new DAOException(e.getMessage());
             }
         }
         else if (!Files.exists(users)){
-            LOG.error("FileAdminDao: deleteUser failed. Filed doesn't exist");
-            throw new DAOException("File doesn't exist");
+            LOG.error("FileAdminDao: deleteUser failed. File doesn't exist.");
+            throw new DAOException("File doesn't exist.");
         }
         else {
             LOG.error("FileAdminDao: deleteUser failed. Filed doesn't writable.");
@@ -152,6 +155,7 @@ public class FileAdminDao extends FileDao implements AdminDao {
                 Files.write(books, (book.toString() + '\n').getBytes(), StandardOpenOption.APPEND);
                 return true;
             }catch (IOException e) {
+                LOG.error("FileAdminDao: addNewBook failed. Exception: " + e.getMessage());
                 throw new DAOException(e.getMessage());
             }
         }
@@ -186,20 +190,24 @@ public class FileAdminDao extends FileDao implements AdminDao {
                     }
                 }
                 if (flag){
-                    Files.write(users, content.toString().getBytes(charset));
+                    Files.write(books, content.toString().getBytes(charset));
                     return true;
                 }
+                LOG.error("FileAdminDao: deleteBook failed. Book doesn't exist.");
                 throw new DAOException("Book doesn't exist.");
             }
             catch (IOException e) {
+                LOG.error("FileAdminDao: deleteBook failed. Exception: " + e.getMessage());
                 throw new DAOException(e.getMessage());
             }
         }
         else if (!Files.exists(books)){
-            throw new DAOException("Filed doesn't exist");
+            LOG.error("FileAdminDao: deleteBook failed. File doesn't exist");
+            throw new DAOException("File doesn't exist");
         }
         else {
-            throw new DAOException("Filed doesn't readable.");
+            LOG.error("FileAdminDao: deleteBook failed. File doesn't writable.");
+            throw new DAOException("File doesn't writable.");
         }
     }
 

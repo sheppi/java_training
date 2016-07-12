@@ -33,17 +33,21 @@ public class FileCommonDao extends FileDao implements CommonDao {
                         return true;
                     }
                 }
+                LOG.error("FileCommonDao: authorization failed. This login doesn't exist.");
+                throw new DAOException("This login doesn't exist.");
             } catch (IOException e) {
+                LOG.error("FileCommonDao: authorization failed. Exception: " + e.getMessage());
                 throw new DAOException(e.getMessage());
             }
         }
         else if (!Files.exists(users)){
-            throw new DAOException("Filed doesn't exist.");
+            LOG.error("FileCommonDao: authorization failed. Filed doesn't exist");
+            throw new DAOException("File doesn't exist");
         }
         else {
-            throw new DAOException("Filed doesn't readable.");
+            LOG.error("FileCommonDao: authorization failed. Filed doesn't writable.");
+            throw new DAOException("File doesn't writable.");
         }
-        return false;
     }
 
     @Override
@@ -58,20 +62,24 @@ public class FileCommonDao extends FileDao implements CommonDao {
                     if (line.contains(login + " " + password)){
                         throw new DAOException("User already exist");
                     }
-                    lastId = Integer.parseInt(line.substring(0,3));
+                    String[] params = line.split(" ");
+                    lastId = Integer.parseInt(params[0]);
                 }
                 String user = String.valueOf(lastId+1) + ' ' + login + ' ' + password + '\n';
                 Files.write(users, user.getBytes(), StandardOpenOption.APPEND);
                 return true;
             } catch (IOException e) {
+                LOG.error("FileCommonDao: registration failed. Exception: " + e.getMessage());
                 throw new DAOException(e.getMessage());
             }
         }
         else if (!Files.exists(users)){
-            throw new DAOException("Filed doesn't exist.");
+            LOG.error("FileCommonDao: registration failed. Filed doesn't exist");
+            throw new DAOException("File doesn't exist");
         }
         else {
-            throw new DAOException("Filed doesn't readable or writable.");
+            LOG.error("FileCommonDao: registration failed. Filed doesn't writable.");
+            throw new DAOException("File doesn't writable.");
         }
     }
 
