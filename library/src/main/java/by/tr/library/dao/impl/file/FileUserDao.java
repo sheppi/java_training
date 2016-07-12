@@ -5,6 +5,8 @@ import by.tr.library.bean.ProgrammerBook;
 import by.tr.library.dao.datatype.FileDao;
 import by.tr.library.dao.UserDao;
 import by.tr.library.dao.exception.DAOException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -16,6 +18,8 @@ import java.util.Scanner;
  * Created by Kirill Kaluga on 10.07.2016.
  */
 public class FileUserDao extends FileDao implements UserDao {
+
+    private static final Logger LOG = LogManager.getRootLogger();
 
     @Override
     public List<Book> getCatalog() throws DAOException {

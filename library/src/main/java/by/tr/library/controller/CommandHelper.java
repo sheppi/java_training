@@ -5,10 +5,7 @@ import java.util.Map;
 
 import by.tr.library.command.Command;
 import by.tr.library.command.impl.book.*;
-import by.tr.library.command.impl.user.AuthorizationCommand;
-import by.tr.library.command.impl.user.BlockUser;
-import by.tr.library.command.impl.user.RegisterUser;
-import by.tr.library.command.impl.user.UnBlockUser;
+import by.tr.library.command.impl.user.*;
 
 public class CommandHelper {
 	private Map<CommandName, Command> commands = new HashMap<>();
@@ -25,6 +22,7 @@ public class CommandHelper {
 		commands.put(CommandName.BLOCK_USER, new BlockUser());
 		commands.put(CommandName.REGISTER_USER, new RegisterUser());
 		commands.put(CommandName.UNBLOCK_USER, new UnBlockUser());
+		commands.put(CommandName.DELETE_USER, new DeleteUser());
 
 	}
 	

@@ -3,6 +3,8 @@ package by.tr.library.dao.impl.file;
 import by.tr.library.dao.CommonDao;
 import by.tr.library.dao.datatype.FileDao;
 import by.tr.library.dao.exception.DAOException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -13,6 +15,8 @@ import java.util.Scanner;
  * Created by Kirill Kaluga on 10.07.2016.
  */
 public class FileCommonDao extends FileDao implements CommonDao {
+
+    private static final Logger LOG = LogManager.getRootLogger();
 
     @Override
     public boolean authorization(String login, String password) throws DAOException {

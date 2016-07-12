@@ -26,9 +26,8 @@ public class Start {
 		System.out.println(response.getListBook());
 
 		request = new Request();
-		request.setCommandName("REGISTER_USER");
-		request.setLogin("mynewlogin123");
-		request.setPassword("mynewpassword123");
+		request.setCommandName("DELETE_USER");
+		request.setId(351);
 		response = controller.doAction(request);
 		System.out.println(response.getMessage());
 	}

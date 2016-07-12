@@ -1,4 +1,0 @@
-123 user userpass 1
-157 mylogin mypassword 1
-220 badboy reallybad 1 blocked
-123 admin admin 10

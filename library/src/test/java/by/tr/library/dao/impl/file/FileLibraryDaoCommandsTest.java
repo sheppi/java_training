@@ -7,24 +7,20 @@ import static org.junit.Assert.*;
 /**
  * Created by Kirill Kaluga on 12.07.2016.
  */
-public class FileAdminDaoTest {
+public class FileLibraryDaoCommandsTest {
+
     @Test
-    public void blockUser() throws Exception {
+    public void testAddNewBook() throws Exception {
 
     }
 
     @Test
-    public void unBlockUser() throws Exception {
+    public void getBookByTitle() throws Exception {
 
     }
 
     @Test
-    public void deleteUser() throws Exception {
-
-    }
-
-    @Test
-    public void addNewBook() throws Exception {
+    public void getCatalog() throws Exception {
 
     }
 

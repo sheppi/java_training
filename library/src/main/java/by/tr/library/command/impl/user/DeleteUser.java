@@ -28,7 +28,7 @@ public class DeleteUser implements Command {
         }
         Response response = new Response();
         response.setErrorMessage(null);
-        response.setMessage("Logination is OK");
+        response.setMessage("User " + id + " is successfully deleted.");
 
         return response;
     }
