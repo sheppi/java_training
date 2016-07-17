@@ -1,4 +1,4 @@
-package com.epam.pool.controller;
+package com.epam.pool.service;
 
 import java.util.ResourceBundle;
 
