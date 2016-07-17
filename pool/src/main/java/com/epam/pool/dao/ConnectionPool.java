@@ -1,8 +1,8 @@
 package com.epam.pool.dao;
 
-import com.epam.pool.entity.DBParameter;
+import com.epam.pool.dao.parameters.DBParameter;
 import com.epam.pool.service.DBResourceManager;
-import com.epam.pool.exception.ConnectionPoolException;
+import com.epam.pool.dao.exception.ConnectionPoolException;
 
 import java.sql.*;
 import java.util.Locale;

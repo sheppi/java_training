@@ -1,4 +1,4 @@
-package com.epam.pool.entity;
+package com.epam.pool.dao.parameters;
 
 /**
  * Created by Kirill_Kaluga on 7/13/2016.

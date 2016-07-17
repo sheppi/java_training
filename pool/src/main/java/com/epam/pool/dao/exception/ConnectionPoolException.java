@@ -1,4 +1,4 @@
-package com.epam.pool.exception;
+package com.epam.pool.dao.exception;
 
 /**
  * Created by Kirill_Kaluga on 7/13/2016.
