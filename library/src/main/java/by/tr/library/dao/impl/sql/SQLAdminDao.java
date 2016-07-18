@@ -7,6 +7,10 @@ import by.tr.library.dao.exception.DAOException;
 
 public class SQLAdminDao extends SQLDao implements AdminDao {
 
+	public SQLAdminDao() throws DAOException {
+		super();
+	}
+
 	@Override
 	public boolean blockUser(int idUser) {
 		// TODO Auto-generated method stub

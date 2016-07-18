@@ -3,9 +3,14 @@ package by.tr.library.dao.impl.sql;
 import java.io.IOException;
 
 import by.tr.library.dao.CommonDao;
+import by.tr.library.dao.datatype.SQLDao;
 import by.tr.library.dao.exception.DAOException;
 
-public class SQLCommonDao implements CommonDao {
+public class SQLCommonDao extends SQLDao implements CommonDao {
+
+	public SQLCommonDao() throws DAOException {
+		super();
+	}
 
 	@Override
 	public boolean authorization(String login, String password) throws DAOException {
