@@ -2,9 +2,10 @@ package by.tr.library.dao.impl.sql;
 
 import by.tr.library.bean.Book;
 import by.tr.library.dao.AdminDao;
+import by.tr.library.dao.datatype.SQLDao;
 import by.tr.library.dao.exception.DAOException;
 
-public class SQLAdminDao implements AdminDao {
+public class SQLAdminDao extends SQLDao implements AdminDao {
 
 	@Override
 	public boolean blockUser(int idUser) {
