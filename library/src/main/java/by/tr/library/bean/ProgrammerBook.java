@@ -2,6 +2,8 @@ package by.tr.library.bean;
 
 public class ProgrammerBook extends Book {
 
+	private final static String type = "programmer";
+
 	private String language;
 	private String level;
 	
@@ -42,8 +44,10 @@ public class ProgrammerBook extends Book {
 
 	@Override
 	public String toString() {
-		return getAuthor() + ' ' + getTitle() + ' ' + getPrice() + ' ' + language + ' ' + level;
+		return super.toString() + ' ' + language + ' ' + level;
 	}
+
+    public String toSQLValues() { return  super.toSQLValues() + ",\'" + language + "\',\'" + level + "\'";}
 
 	@Override
 	public boolean equals(Object o) {

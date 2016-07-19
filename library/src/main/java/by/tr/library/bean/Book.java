@@ -2,6 +2,8 @@ package by.tr.library.bean;
 
 public class Book {
 
+	private final static String type = "default";
+
 	private String author;
 	private String title;
 	private int price;
@@ -19,9 +21,8 @@ public class Book {
 	}
 
 	public Book(String author, String title, int price) {
+		this(author, price);
 		this.title = title;
-		this.author = author;
-		this.price = price;
 	}
 
 
@@ -52,10 +53,16 @@ public class Book {
 		this.author = author;
 	}
 
+	public static String getType() {
+		return type;
+	}
+
 	@Override
 	public String toString() {
-		return author + ' ' + title + ' ' + price;
+		return author + ' ' + title + ' ' + price ;
 	}
+
+	public String toSQLValues() { return "\'" + author + "\',\'" + title + "\',\'" + price + "\',\'" + type + "\'";}
 
 	@Override
 	public boolean equals(Object o) {
