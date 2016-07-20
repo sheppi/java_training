@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        targetNamespace="http://www.autoservice.com/spareSchema"
+        xmlns:spare="http://www.autoservice.com/spareSchema">
+    <complexType name="spare">
+        <attribute name="storeID" use="required">
+            <data type="spare:UUID"/>
+        </attribute>
+        <sequence>
+            <element name="productID" type="spare:UUID"/>
+            <element name="name" type="string" />
+            <element name="price" type="spare:price"/>
+            <element name="type" type="spare:type" default="replica"/>
+            <element name="manufacturer" type="string" />
+            <element name="supplier" type="string" />
+        </sequence>
+    </complexType>
+
+    <!-- custom types-->
+
+    <complexType name="price">
+        <simpleContent>
+            <extension base="decimal">
+                <fractionDigits value="2"/>
+                <attribute name="currency" type="spare:currencyType"/>
+            </extension>
+        </simpleContent>
+    </complexType>
+    <simpleType name="currencyType">
+        <restriction base="string">
+            <enumeration value="BYN"/>
+            <enumeration value="EUR"/>
+            <enumeration value="USD"/>
+        </restriction>
+    </simpleType>
+
+    <simpleType name="type">
+        <restriction base="string">
+            <enumeration value="original"/>
+            <enumeration value="authorized"/>
+            <enumeration value="replica"/>
+        </restriction>
+    </simpleType>
+
+    <simpleType name="UUID">
+            <restriction base="ID">
+                <pattern value="[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}"/>
+            </restriction>
+    </simpleType>
+</schema>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        targetNamespace="http://www.autoservice.com/actionSchema"
+        xmlns:action="http://www.autoservice.com/actionSchema">
+    <import namespace='http://www.autoservice.com/spareSchema'
+            schemaLocation='spare.xsd'/>
+    <complexType name="action">
+        <attribute name="actionID" use="required">
+            <data type="spare:UUID"/>
+        </attribute>
+        <sequence>
+            <element name="name" type="string" />
+            <element name="unit" type="action:unitType"/>
+            <element name="man-hours" type="action:man-hours"/>
+            <element name="price" type="spare:price"/>
+        </sequence>
+    </complexType>
+
+    <!-- custom types-->
+
+    <simpleType name="unitType">
+        <restriction base="string">
+            <enumeration value="inspection"/>
+            <enumeration value="common"/>
+            <enumeration value="chassis"/>
+            <enumeration value="engine"/>
+            <enumeration value="electrical"/>
+            <enumeration value="body"/>
+        </restriction>
+    </simpleType>
+
+    <simpleType name="man-hours">
+        <restriction base="decimal">
+            <fractionDigits value="2" />
+        </restriction>
+    </simpleType>
+</schema>

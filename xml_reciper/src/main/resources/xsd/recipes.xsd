@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        targetNamespace="http://www.autoservice.com/recipesSchema"
+        xmlns:maintenance="http://www.autoservice.com/recipesSchema"
+        elementFormDefault="qualified">
+    <element name="Maintenances">
+        <complexType>
+            <sequence>
+                <element name="maintenance"
+                         type="maintenance:Maintenance"
+                         minOccurs="2"
+                         maxOccurs="unbounded" />
+            </sequence>
+        </complexType>
+    </element>
+    <complexType name="Maintenance">
+        <sequence>
+            <element name="name" type="string" />
+            <element name="level" type="maintenance:level"/>
+        </sequence>
+        <attribute name="id" use="required">
+            <data type="ID"/>
+        </attribute>
+
+    </complexType>
+
+
+
+
+    <simpleType name="level">
+        <restriction base="integer">
+            <minInclusive value="0"/>
+            <maxInclusive value="10"/>
+        </restriction>
+    </simpleType>
+</schema>
