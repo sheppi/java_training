@@ -18,7 +18,7 @@ public class SQLAdminDao extends SQLDao implements AdminDao {
 	@Override
 	public boolean blockUser(int idUser) throws DAOException {
 		String toBlockSQL = "UPDATE USERS"
-				+ " SET ??? = 'false' " //TODO
+				+ " SET user_status = 'false' " //TODO
 				+ " WHERE USER_ID = " + idUser;
 		ResultSet resultSet = execute(toBlockSQL);
 		System.out.println(resultSet.toString()); //debug
@@ -27,9 +27,9 @@ public class SQLAdminDao extends SQLDao implements AdminDao {
 
 	@Override
 	public boolean unBlockUser(int idUser) throws DAOException {
-		String toUnBlockSQL = "UPDATE USERS"
-				+ " SET ??? = 'true' " //TODO
-				+ " WHERE USER_ID = " + idUser;
+		String toUnBlockSQL = "UPDATE users"
+				+ " SET user_status = 'true' " //TODO
+				+ " WHERE user_id = " + idUser;
 		ResultSet resultSet = execute(toUnBlockSQL);
 		System.out.println(resultSet.toString()); //debug
 		return true;
@@ -37,7 +37,7 @@ public class SQLAdminDao extends SQLDao implements AdminDao {
 
 	@Override
 	public boolean deleteUser(int idUser) throws DAOException {
-		String deleteUserSQL = "DELETE USERS WHERE USER_ID = " + idUser;
+		String deleteUserSQL = "DELETE users WHERE user_id = " + idUser;
 		ResultSet resultSet = execute(deleteUserSQL);
 		System.out.println(resultSet.toString()); //debug
 		return true;
@@ -48,14 +48,14 @@ public class SQLAdminDao extends SQLDao implements AdminDao {
 		String addNewBookSQL;
 		switch (book.getType()){
 			case "programmer":
-				addNewBookSQL = "INSERT INTO BOOKS"
-						+ "(BOOK_AUTHOR, BOOK_TITLE, BOOK_PRICE, BOOK_TYPE, BOOK_FIRSTPARAM, BOOK_SECONDPARAM) " + "VALUES"
+				addNewBookSQL = "INSERT INTO books"
+						+ "(book_author, book_title, book_price, book_type, book_firstparam, book_secondparam) " + "VALUES"
 						+ "(" + book.toString() + ")";
 				break;
 
 			default:
-				addNewBookSQL = "INSERT INTO BOOKS"
-						+ "(BOOK_AUTHOR, BOOK_TITLE, BOOK_PRICE, BOOK_TYPE) " + "VALUES"
+				addNewBookSQL = "INSERT INTO books"
+						+ "(book_author, book_title, book_price, book_type) " + "VALUES"
 						+ "(" + book.toString() + ")";
 				break;
 		}
@@ -66,7 +66,7 @@ public class SQLAdminDao extends SQLDao implements AdminDao {
 
 	@Override
 	public boolean deleteBook(String title) throws DAOException {
-		String deleteUserSQL = "DELETE BOOKS WHERE BOOK_TITLE = \'" + title + "\'";
+		String deleteUserSQL = "DELETE books WHERE book_title = \'" + title + "\'";
 		ResultSet resultSet = execute(deleteUserSQL);
 		System.out.println(resultSet.toString()); //debug
 		return false;
