@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        targetNamespace="http://www.autoservice.com/maintenancesSchema"
+        xmlns:tns="http://www.autoservice.com/maintenancesSchema"
+        xmlns:action="http://www.autoservice.com/actionSchema"
+        elementFormDefault="qualified"
+        attributeFormDefault="qualified">
+    <import namespace='http://www.autoservice.com/spareSchema'
+            schemaLocation='spare.xsd'/>
+    <import namespace='http://www.autoservice.com/actionSchema'
+            schemaLocation='action.xsd'/>
+    <element name="Maintenances">
+        <complexType>
+            <sequence>
+                <element name="maintenance"
+                         type="tns:Maintenance"
+                         minOccurs="2"
+                         maxOccurs="unbounded" />
+            </sequence>
+        </complexType>
+    </element>
+
+    <!-- Main type -->
+
+    <complexType name="Maintenance">
+        <sequence>
+            <element name="name" type="string" />
+            <element name="price" type="tns:price"/>
+            <element name="level" type="tns:level"/>
+            <element name="unit" type="tns:unitType"/>
+            <element name="actions">
+                <complexType>
+                    <sequence>
+                        <element name="action" type="action:ActionType"/>
+                    </sequence>
+                </complexType>
+            </element>
+        </sequence>
+        <attribute name="id" use="required" type="ID"/>
+    </complexType>
+
+    <!--Additional types-->
+
+    <complexType name="price">
+        <attribute name="amount" type="tns:amount" use="required"/>
+        <attribute name="currency" type="tns:currencyType" use="required" />
+    </complexType>
+
+    <simpleType name="amount">
+        <restriction base="decimal">
+            <fractionDigits value="2"/>
+            <minExclusive value="0"/>
+        </restriction>
+    </simpleType>
+
+    <simpleType name="currencyType">
+        <restriction base="string">
+            <enumeration value="BYN"/>
+            <enumeration value="EUR"/>
+            <enumeration value="USD"/>
+        </restriction>
+    </simpleType>
+
+    <simpleType name="level">
+        <restriction base="integer">
+            <minInclusive value="0"/>
+            <maxInclusive value="10"/>
+        </restriction>
+    </simpleType>
+
+    <simpleType name="unitType">
+        <restriction base="string">
+            <enumeration value="inspection"/>
+            <enumeration value="common"/>
+            <enumeration value="chassis"/>
+            <enumeration value="engine"/>
+            <enumeration value="electrical"/>
+            <enumeration value="body"/>
+        </restriction>
+    </simpleType>
+
+</schema>

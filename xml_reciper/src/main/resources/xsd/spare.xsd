@@ -1,31 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schema xmlns="http://www.w3.org/2001/XMLSchema"
         targetNamespace="http://www.autoservice.com/spareSchema"
-        xmlns:spare="http://www.autoservice.com/spareSchema">
-    <complexType name="spare">
-        <attribute name="storeID" use="required">
-            <data type="spare:UUID"/>
-        </attribute>
+        xmlns:tns="http://www.autoservice.com/spareSchema"
+        elementFormDefault="qualified"
+        attributeFormDefault="qualified">
+    <complexType name="SpareType">
         <sequence>
-            <element name="productID" type="spare:UUID"/>
+            <element name="productID" type="tns:UUID"/>
             <element name="name" type="string" />
-            <element name="price" type="spare:price"/>
-            <element name="type" type="spare:type" default="replica"/>
+            <element name="price" type="tns:price"/>
+            <element name="type" type="tns:type" default="unknown"/>
             <element name="manufacturer" type="string" />
             <element name="supplier" type="string" />
         </sequence>
+        <attribute name="storeID" use="required" type="tns:UUID"/>
     </complexType>
 
     <!-- custom types-->
 
     <complexType name="price">
-        <simpleContent>
-            <extension base="decimal">
-                <fractionDigits value="2"/>
-                <attribute name="currency" type="spare:currencyType"/>
-            </extension>
-        </simpleContent>
+        <attribute name="amount" type="tns:amount" use="required"/>
+        <attribute name="currency" type="tns:currencyType" use="required" />
     </complexType>
+
+    <simpleType name="amount">
+        <restriction base="decimal">
+            <fractionDigits value="2"/>
+            <minExclusive value="0"/>
+        </restriction>
+    </simpleType>
+
     <simpleType name="currencyType">
         <restriction base="string">
             <enumeration value="BYN"/>
@@ -39,6 +43,7 @@
             <enumeration value="original"/>
             <enumeration value="authorized"/>
             <enumeration value="replica"/>
+            <enumeration value="unknown"/>
         </restriction>
     </simpleType>
 
@@ -47,4 +52,5 @@
                 <pattern value="[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}"/>
             </restriction>
     </simpleType>
+
 </schema>

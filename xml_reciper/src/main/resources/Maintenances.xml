@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ms:Maintenances xmlns:ms="http://www.autoservice.com/maintenancesSchema"
+                 xmlns:sp="http://www.autoservice.com/spareSchema"
+                 xmlns:ac="http://www.autoservice.com/actionSchema"
+                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                 xsi:schemaLocation="http://www.autoservice.com/maintenancesSchema">
+    <!--Auto maintenance recipes: 0, 1, 2, 3, and service typical recipes: diagnosis, visual inspection, technical inspection and others
+Example: Maintenance-0-->
+
+    <ms:maintenance ms:id="">
+        <ms:name></ms:name>
+        <ms:price ms:amount="3.00" ms:currency="BYN"/>
+        <ms:level></ms:level>
+        <ms:unit></ms:unit>
+        <ms:actions>
+            <ms:action ac:actionID=""></ms:action>
+        </ms:actions>
+    </ms:maintenance>
+
+</ms:Maintenances>
