@@ -1,20 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ms:Maintenances xmlns:ms="http://www.autoservice.com/maintenancesSchema"
-                 xmlns:sp="http://www.autoservice.com/spareSchema"
-                 xmlns:ac="http://www.autoservice.com/actionSchema"
+<ms:maintenances xmlns:ms="http://www.autoservice.com/maintenancesSchema"
+                 xmlns:spare="http://www.autoservice.com/spareSchema"
+                 xmlns:action="http://www.autoservice.com/actionSchema"
                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                  xsi:schemaLocation="http://www.autoservice.com/maintenancesSchema">
     <!--Auto maintenance recipes: 0, 1, 2, 3, and service typical recipes: diagnosis, visual inspection, technical inspection and others
 Example: Maintenance-0-->
-
-    <ms:maintenance ms:id="">
-        <ms:name></ms:name>
-        <ms:price ms:amount="3.00" ms:currency="BYN"/>
-        <ms:level></ms:level>
-        <ms:unit></ms:unit>
+    <ms:maintenance ms:id="6e4f3cf8-4f4e-11e6-beb8-9e71128cae77">
+        <ms:name>Fast inspection</ms:name>
+        <ms:price ms:amount="9.00" ms:currency="BYN"/>
+        <ms:level>10</ms:level>
+        <ms:unit>inspection</ms:unit>
         <ms:actions>
-            <ms:action ac:actionID=""></ms:action>
+            <ms:action action:id="20622b2e-38b6-444b-a432-cfd40813da40">
+                <action:name>auto lift inspection</action:name>
+                <action:manhours>0.5</action:manhours>
+                <action:price action:amount="1.00" action:currency="BYN"/>
+                <action:spares>
+                    <action:spare spare:id="b6893244-32d5-47b4-8ed6-b60617f3ea6c">
+                        <spare:productID>1ae93277-5f08-47e2-9a3f-96c378970c7d</spare:productID>
+                        <spare:name>Work gloves</spare:name>
+                        <spare:price spare:amount="1.00" spare:currency="BYN"/>
+                        <spare:type>original</spare:type>
+                        <spare:manufacturer>ZM</spare:manufacturer>
+                        <spare:supplier>OOO"Evrotorg"</spare:supplier>
+                    </action:spare>
+                    <action:spare spare:id="30775306-2574-41fc-89c4-a9a6a9a8e222">
+                        <spare:productID>ba00dcb7-eb1e-45f4-a1cc-ea9c28ca65f9</spare:productID>
+                        <spare:name>rubber stand</spare:name>
+                        <spare:price spare:amount="2.00" spare:currency="BYN"/>
+                        <spare:type>authorized</spare:type>
+                        <spare:manufacturer>HyaoFeng Inc.</spare:manufacturer>
+                        <spare:supplier>ZAO"Sholkovii Put'"</spare:supplier>
+                    </action:spare>
+                </action:spares>
+            </ms:action>`
+            <ms:action></ms:action>`
         </ms:actions>
     </ms:maintenance>
-
-</ms:Maintenances>
+</ms:maintenances>

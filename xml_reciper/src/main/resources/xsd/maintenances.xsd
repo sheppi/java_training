@@ -31,7 +31,10 @@
             <element name="actions">
                 <complexType>
                     <sequence>
-                        <element name="action" type="action:actionType"/>
+                        <element name="action"
+                                 type="action:actionType"
+                                 minOccurs="2"
+                                 maxOccurs="unbounded"/>
                     </sequence>
                 </complexType>
             </element>
@@ -80,8 +83,9 @@
     </simpleType>
 
     <simpleType name="UUID">
-        <restriction base="ID">
-            <pattern value="[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}"/>
+        <restriction base="string">
+            <length value="36" fixed="true"/>
+            <pattern value="[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-4[0-9a-fA-F]{3}-[8-9a-bA-B][0-9a-fA-F]{3}-[0-9a-fA-F]{12}" fixed="true" />
         </restriction>
     </simpleType>
 
