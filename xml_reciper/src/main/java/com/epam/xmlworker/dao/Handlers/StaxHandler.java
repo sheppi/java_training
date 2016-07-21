@@ -71,11 +71,39 @@ public class StaxHandler {
                             id = UUID.fromString(reader.getAttributeValue(null, "id"));
                             spare = new Spare(id);
                             break;
+
+                        //price
+                        case "price":
+                            Double amount = Double.valueOf(reader.getAttributeValue(null, "amount"));
+                            CurrencyCode currencyCode = CurrencyCode.valueOf(reader.getAttributeValue(null, "currency"));
+                            Price price = new Price(amount, currencyCode);
+                            switch (currentElement){
+                                case "maintenance":
+                                    maintenance.setPrice(price);
+                                    break;
+                                case "action":
+                                    action.setPrice(price);
+                                    break;
+                                case "spare":
+                                    spare.setPrice(price);
+                                    break;
+                            }
+                            break;
+                        //lists
+                        case "actions":
+                            actionList = new ArrayList<>();
+                            break;
+                        case "spares":
+                            spareList = new ArrayList<>();
+                            break;
                     }
                     break;
 
                 case XMLStreamConstants.CHARACTERS:
                     String text = reader.getText().trim();
+                    if (text.isEmpty()){
+                        break;
+                    }
                     switch (elementName){
                         //strings
                         case "name":
@@ -97,23 +125,6 @@ public class StaxHandler {
                         case "supplier":
                             spare.setSupplier(text);
                             break;
-                        //price
-                        case "price":
-                            Double amount = Double.valueOf(reader.getAttributeValue(null, "amount"));
-                            CurrencyCode currencyCode = CurrencyCode.valueOf(reader.getAttributeValue(null, "currency"));
-                            Price price = new Price(amount, currencyCode);
-                            switch (currentElement){
-                                case "maintenance":
-                                    maintenance.setPrice(price);
-                                    break;
-                                case "action":
-                                    action.setPrice(price);
-                                    break;
-                                case "spare":
-                                    spare.setPrice(price);
-                                    break;
-                            }
-                            break;
                         //Numbers
                         case "man-hours":
                             Double manhours = Double.parseDouble(text);
@@ -132,13 +143,6 @@ public class StaxHandler {
                             Unit unit = Unit.valueOf(text);
                             maintenance.setUnit(unit);
                             break;
-                        //lists
-                        case "actions":
-                            actionList = new ArrayList<>();
-                            break;
-                        case "spares":
-                            spareList = new ArrayList<>();
-                            break;
                     }
                     break;
 
@@ -149,10 +153,19 @@ public class StaxHandler {
                             maintenanceList.add(maintenance);
                             break;
                         case "action":
+                            currentElement = "maintenance";
                             actionList.add(action);
                             break;
                         case "spare":
+                            currentElement = "action";
                             spareList.add(spare);
+                            break;
+                        //lists
+                        case "actions":
+                            maintenance.setActions(actionList);
+                            break;
+                        case "spares":
+                            action.setSpares(spareList);
                             break;
                     }
                     break;
@@ -162,69 +175,5 @@ public class StaxHandler {
 
 
         return maintenanceList;
-    }
-
-    private Maintenance getMaintance(Element element){
-        UUID id = UUID.fromString(element.getAttribute("id"));
-        Maintenance maintenance = new Maintenance(id);
-        maintenance.setName(getSingleChild(element, "name").getTextContent().trim());
-        maintenance.setPrice(getPrice(element));
-        maintenance.setLevel(Short.parseShort(getSingleChild(element, "level").getTextContent().trim()));
-        maintenance.setUnit(Unit.valueOf(getSingleChild(element, "unit").getTextContent().trim()));
-        //
-        Element actions = getSingleChild(element, "actions");
-        NodeList actionNodes = actions.getElementsByTagName("action");
-        ArrayList<Action> actionList = new ArrayList<>();
-        for (int j=0; j < actionNodes.getLength(); j++){
-            element = (Element) actionNodes.item(j);
-            actionList.add(getAction(element));
-        }
-        //
-        maintenance.setActions(actionList);
-        return maintenance;
-    }
-
-    private Action getAction(Element element){
-        UUID id = UUID.fromString(element.getAttribute("id"));
-        Action action = new Action(id);
-        action.setName(getSingleChild(element, "name").getTextContent().trim());
-        action.setPrice(getPrice(element));
-        action.setManhours(Double.parseDouble(getSingleChild(element, "man-hours").getTextContent().trim()));
-        //
-        Element spares = getSingleChild(element, "spares");
-        NodeList spareNodes = spares.getElementsByTagName("spare");
-        ArrayList<Spare> spareList = new ArrayList<>();
-        for (int k=0; k < spareNodes.getLength(); k++){
-            element = (Element) spareNodes.item(k);
-            spareList.add(getSpare(element));
-        }
-        //
-        action.setSpares(spareList);
-        return action;
-    }
-
-    private Spare getSpare(Element element){
-        UUID id = UUID.fromString(element.getAttribute("storeID"));
-        Spare spare = new Spare(id);
-        spare.setProductID(UUID.fromString(getSingleChild(element, "productID").getTextContent().trim()));
-        spare.setName(getSingleChild(element, "name").getTextContent().trim());
-        spare.setPrice(getPrice(element));
-        spare.setType(SpareType.valueOf(getSingleChild(element, "type").getTextContent().trim()));
-        spare.setManufacturer(getSingleChild(element, "manufacturer").getTextContent().trim());
-        spare.setSupplier(getSingleChild(element, "supplier").getTextContent().trim());
-        return spare;
-    }
-
-    private Price getPrice(Element maintenanceElement) {
-        Element priceElement = getSingleChild(maintenanceElement, "price");
-        Double amount = Double.valueOf(priceElement.getAttribute("amount"));
-        CurrencyCode currencyCode = CurrencyCode.valueOf(priceElement.getAttribute("currency"));
-        return new Price(amount, currencyCode);
-    }
-
-    private Element getSingleChild(Element element, String childName){
-        NodeList nlist = element.getElementsByTagName(childName);
-        Element child = (Element) nlist.item(0);
-        return child;
     }
 }
