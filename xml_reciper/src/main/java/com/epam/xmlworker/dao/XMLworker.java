@@ -5,6 +5,7 @@ import com.epam.xmlworker.dao.Handlers.SaxHandler;
 import com.epam.xmlworker.dao.Handlers.StaxHandler;
 import com.epam.xmlworker.entity.Maintenance;
 
+import javax.xml.stream.XMLStreamException;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,20 +35,32 @@ public class XMLworker {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return true;
     }
 
     public List<Maintenance> SAXworker(InputStream input) {
         SaxHandler handler = new SaxHandler();
-        return handler.handle(input);
+//        try {
+//
+//            return handler.handle(input);
+//        } catch (XMLStreamException e) {
+//            e.printStackTrace();
+//        }
+        return null;
     }
 
     public List<Maintenance> StAXworker(InputStream input) {
         StaxHandler handler = new StaxHandler();
-        return handler.handle(input);
+        try {
+            return handler.handle(input);
+        } catch (XMLStreamException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public List<Maintenance> DOMworker(String path) {
-        DomHandler handler = new DomHandler();
-        return handler.handle(path);
+        DomHandler handler = new DomHandler(path);
+        return handler.handle();
     }
 }

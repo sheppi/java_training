@@ -3,6 +3,7 @@ package com.epam.xmlworker.dao.Handlers;
 import com.epam.xmlworker.entity.Action;
 import com.epam.xmlworker.entity.Maintenance;
 import com.epam.xmlworker.entity.Spare;
+import com.epam.xmlworker.entity.additional.CurrencyCode;
 import com.epam.xmlworker.entity.additional.Price;
 import com.epam.xmlworker.entity.additional.SpareType;
 import com.epam.xmlworker.entity.additional.Unit;
@@ -94,7 +95,7 @@ public class DomHandler {
     }
 
     private Spare getSpare(Element element){
-        UUID id = UUID.fromString(element.getAttribute("storeID"));
+        UUID id = UUID.fromString(element.getAttribute("id"));
         Spare spare = new Spare(id);
         spare.setProductID(UUID.fromString(getSingleChild(element, "productID").getTextContent().trim()));
         spare.setName(getSingleChild(element, "name").getTextContent().trim());
@@ -108,7 +109,7 @@ public class DomHandler {
     private Price getPrice(Element maintenanceElement) {
         Element priceElement = getSingleChild(maintenanceElement, "price");
         Double amount = Double.valueOf(priceElement.getAttribute("amount"));
-        String currencyCode = priceElement.getAttribute("currency");
+        CurrencyCode currencyCode = CurrencyCode.valueOf(priceElement.getAttribute("currency"));
         return new Price(amount, currencyCode);
     }
 
