@@ -4,7 +4,7 @@
         xmlns:tns="http://www.autoservice.com/spareSchema"
         elementFormDefault="qualified"
         attributeFormDefault="qualified">
-    <complexType name="SpareType">
+    <complexType name="spareType">
         <sequence>
             <element name="productID" type="tns:UUID"/>
             <element name="name" type="string" />

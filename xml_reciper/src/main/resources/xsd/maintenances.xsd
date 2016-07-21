@@ -9,11 +9,11 @@
             schemaLocation='spare.xsd'/>
     <import namespace='http://www.autoservice.com/actionSchema'
             schemaLocation='action.xsd'/>
-    <element name="Maintenances">
+    <element name="maintenances">
         <complexType>
             <sequence>
                 <element name="maintenance"
-                         type="tns:Maintenance"
+                         type="tns:maintenanceType"
                          minOccurs="2"
                          maxOccurs="unbounded" />
             </sequence>
@@ -22,7 +22,7 @@
 
     <!-- Main type -->
 
-    <complexType name="Maintenance">
+    <complexType name="maintenanceType">
         <sequence>
             <element name="name" type="string" />
             <element name="price" type="tns:price"/>
@@ -31,12 +31,12 @@
             <element name="actions">
                 <complexType>
                     <sequence>
-                        <element name="action" type="action:ActionType"/>
+                        <element name="action" type="action:actionType"/>
                     </sequence>
                 </complexType>
             </element>
         </sequence>
-        <attribute name="id" use="required" type="ID"/>
+        <attribute name="id" use="required" type="tns:UUID"/>
     </complexType>
 
     <!--Additional types-->
@@ -76,6 +76,12 @@
             <enumeration value="engine"/>
             <enumeration value="electrical"/>
             <enumeration value="body"/>
+        </restriction>
+    </simpleType>
+
+    <simpleType name="UUID">
+        <restriction base="ID">
+            <pattern value="[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}"/>
         </restriction>
     </simpleType>
 

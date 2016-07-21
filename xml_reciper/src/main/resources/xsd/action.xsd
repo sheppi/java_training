@@ -7,21 +7,20 @@
         attributeFormDefault="qualified">
     <import namespace='http://www.autoservice.com/spareSchema'
             schemaLocation='spare.xsd'/>
-    <complexType name="ActionType">
+    <complexType name="actionType">
         <sequence>
             <element name="name" type="string" />
-
             <element name="man-hours" type="tns:man-hours"/>
             <element name="price" type="tns:price"/>
             <element name="spares">
                 <complexType>
                     <sequence>
-                        <element name="spare" type="spare:SpareType"/>
+                        <element name="spare" type="spare:spareType"/>
                     </sequence>
                 </complexType>
             </element>
         </sequence>
-        <attribute name="actionID" use="required" type="tns:UUID"/>
+        <attribute name="id" use="required" type="tns:UUID"/>
     </complexType>
 
     <!-- custom types-->
